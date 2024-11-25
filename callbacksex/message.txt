@@ -1,1 +1,1 @@
-Questo è un file di esempio creato con il metodo fs.writeFile() in Node.js!
+Questo è un file di esempio creato con Node.js!
