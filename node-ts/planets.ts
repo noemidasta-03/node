@@ -64,19 +64,41 @@ const create=((req:Request,res:Response)=>{
   
 })
 const updateById=((req:Request,res:Response)=>{
-    const {id}= req.params
+    const id = Number(req.params?.id)
     const {name}= req.body
-    planets=planets.map(p=> p.id === Number(id) ? ({...p,name}):p)
 
-
-    res.status(200).json({msg:`the planet was update`})
+    const newPlanet = {id, name};
+    if(planetSchema.validate(newPlanet).error){
+      res.status(400).json({msg:`error`})
+    } else {
+      let isPlanetFound = false;
+      planets = planets.map((planet) => {
+        if(planet.id === newPlanet.id) {
+          isPlanetFound = true;
+          return newPlanet;
+        } else {
+          return planet;
+        }
+      })
+      res.status(200).json({msg: isPlanetFound ? `the planet was update` : `no planet found with given id: ${id}`})
+    }
 })
 const deleteById=((req:Request,res:Response)=>{
     const{id}=req.params
-    planets= planets.filter(p=>p.id !== Number(id))
-
    
-    res.status(200).json({msg:`the planet was delete`})
+
+    let isPlanetFound= false;
+
+    planets=planets.filter((planet)=>{
+      if(planet.id == Number(id)){
+        isPlanetFound= true;
+
+      }
+      return planet.id !== Number(id)
+
+    })
+    
+    res.status(200).json({msg: isPlanetFound ? `the planet was deleted` : `no planet found with given id: ${id}`})
 })
 
 export{getAll,getOneById,create,updateById,deleteById}
