@@ -13,6 +13,14 @@
       "*": ["node_modules/*", "src/types/*"]
     }
   },
-  "include": ["*"],
+  "include": [
+    "*",
+    "controllers/server.ts",
+    "server.tss",
+    "src/controll",
+    "src/server.ts",
+    "src/planets.ts",
+    "src/server.ts"
+  ],
   "exclude": ["*.json", "dist"]
 }

@@ -1,17 +1,13 @@
 import { Request, Response } from "express";
 import pgPromise from "pg-promise";
 import Joi from "joi";
-
-const db = pgPromise()(
-  "postgres://postgres:postgres@localhost:5432/planets_db"
-);
+import { db } from "./db";
 
 const planetSchema = Joi.object({
   id: Joi.number().integer().required().max(99).min(1),
   name: Joi.string().required().max(10).min(4),
 });
 
-console.log(db);
 type Planet = {
   id: number;
   name: string;
@@ -81,4 +77,19 @@ const deleteById = (req: Request, res: Response) => {
   });
 };
 
-export { getAll, getOneById, create, updateById, deleteById };
+const createImage = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const fileName = req.file?.path;
+  console.log(req.file);
+
+  if (fileName) {
+    await db.none(`UPDATE planets SET image=$2 WHERE id=$1`, [id, fileName]);
+    res.status(201).json({
+      msg: "planet image uploaded successfully",
+    });
+  } else {
+    res.status(400).json({ msg: `upload error` });
+  }
+};
+
+export { getAll, getOneById, create, updateById, deleteById, createImage };

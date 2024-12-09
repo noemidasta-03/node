@@ -13,14 +13,21 @@
         "@types/express": "^5.0.0",
         "@types/morgan": "^1.9.9",
         "@types/node": "^22.9.0",
+        "@types/passport": "^1.0.17",
+        "@types/passport-jwt": "^4.0.1",
         "tsc-watch": "^6.2.1",
         "typescript": "^5.6.3"
     },
     "dependencies": {
+        "@types/multer": "^1.4.12",
         "dotenv": "^16.4.5",
         "express": "^4.21.1",
         "joi": "^17.13.3",
+        "jsonwebtoken": "^9.0.2",
         "morgan": "^1.10.0",
+        "multer": "^1.4.5-lts.1",
+        "passport": "^0.7.0",
+        "passport-jwt": "^4.0.1",
         "pg-promise": "^11.10.2"
     }
 }
