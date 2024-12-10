@@ -28,5 +28,5 @@ const setupDb = async () => {
   );
 };
 
-setupDb();
+// setupDb();
 export { db };
