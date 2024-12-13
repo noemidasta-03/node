@@ -7,7 +7,7 @@ const server = createServer((request, response) => {
   response.statusCode = 200;
 
   response.setHeader("Content-Type", "application/json");
-  response.setHeader("Content-Lenght", JSON.stringify(result).length);
+  response.setHeader("Content-Length", JSON.stringify(result).length);
 
   response.end(JSON.stringify(result));
 });
